@@ -1,0 +1,118 @@
+{
+  "dns": {
+    "fakeip": {
+      "enabled": false,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    },
+    "independent_cache": true,
+    "reverse_mapping": false,
+    "rules": [
+      {
+        "disable_cache": true,
+        "domain": [
+          "uspider.yuanshen.com",
+          "log-upload.mihoyo.com",
+          "public-data-api.mihoyo.com",
+          "log-upload-os.hoyoverse.com",
+          "sg-public-data-api.hoyoverse.com",
+          "overseauspider.yuanshen.com",
+          "dump.gamesafe.qq.com"
+        ],
+        "server": "dns-block"
+      },
+      {
+        "domain": [
+          "your.socks.provider.com",
+          "ntp.aliyun.com"
+        ],
+        "server": "dns-init"
+      },
+      {
+        "clash_mode": "Global",
+        "server": "dns-proxy"
+      },
+      {
+        "clash_mode": "Direct",
+        "server": "dns-system"
+      },
+      {
+        "domain": [
+          "ip.istatmenus.app"
+        ],
+        "domain_keyword": [
+          "icloud",
+          "zxinc",
+          "mhystatic",
+          "yuhengcup"
+        ],
+        "domain_suffix": [
+          ".me.com"
+        ],
+        "rule_set": [
+          "private",
+          "category-games@cn",
+          "apple-cn"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "domain_keyword": [
+          "github",
+          "bing",
+          "3shain",
+          "hakush",
+          "fygod",
+          "gstatic",
+          "googleapis"
+        ],
+        "rule_set": [
+          "geolocation-!cn",
+          "tld-!cn",
+          "gfw"
+        ],
+        "server": "dns-proxy"
+      },
+      {
+        "rule_set": [
+          "tld-cn",
+          "cn"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "disable_cache": true,
+        "rule_set": "category-ads-all",
+        "server": "dns-block"
+      }
+    ],
+    "servers": [
+      {
+        "tag": "dns-proxy",
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "PROXY",
+        "strategy": "ipv4_only"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "DIRECT",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "tag": "dns-init",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "DIRECT",
+        "strategy": "ipv4_only"
+      },
+      {
+        "tag": "dns-system",
+        "address": "local"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ]
+  }
+}

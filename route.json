@@ -1,0 +1,195 @@
+{
+  "route": {
+    "rule_set": [
+      {
+        "tag": "category-ads-all",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "apple-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple-cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "category-games@cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-games@cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "private",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "tld-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tld-cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "tld-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tld-!cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "gfw",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/gfw.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "openai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "cn-ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "private-ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "telegram",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs",
+        "download_detour": "PROXY",
+        "update_interval": "1d"
+      }
+    ],
+    "rules": [
+      {
+        "clash_mode": "Global",
+        "outbound": "GLOBAL"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "DIRECT"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "DIRECT"
+      },
+      {
+        "domain": [
+          "uspider.yuanshen.com",
+          "log-upload.mihoyo.com",
+          "public-data-api.mihoyo.com",
+          "log-upload-os.hoyoverse.com",
+          "sg-public-data-api.hoyoverse.com",
+          "overseauspider.yuanshen.com",
+          "dump.gamesafe.qq.com"
+        ],
+        "outbound": "BLOCK"
+      },
+      {
+        "domain": [
+          "ip.istatmenus.app"
+        ],
+        "domain_keyword": [
+          "icloud",
+          "zxinc",
+          "mhystatic",
+          "yuhengcup"
+        ],
+        "domain_suffix": [
+          ".me.com"
+        ],
+        "rule_set": [
+          "private",
+          "category-games@cn",
+          "apple-cn",
+          "cn-ip",
+          "private-ip"
+        ],
+        "outbound": "DIRECT"
+      },
+      {
+        "domain_keyword": [
+          "bing",
+          "github",
+          "xn--ngstr-lra8j",
+          "3shain",
+          "hakush",
+          "fygod",
+          "gstatic",
+          "googleapis"
+        ],
+        "rule_set": [
+          "openai",
+          "geolocation-!cn",
+          "tld-!cn",
+          "gfw",
+          "telegram"
+        ],
+        "outbound": "PROXY"
+      },
+      {
+        "rule_set": [
+          "tld-cn",
+          "cn"
+        ],
+        "outbound": "DIRECT"
+      },
+      {
+        "rule_set": "category-ads-all",
+        "outbound": "BLOCK"
+      }
+    ],
+    "final": "FINAL",
+    "auto_detect_interface": true
+  }
+}

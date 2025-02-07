@@ -1,0 +1,90 @@
+{
+  "outbounds": [
+    {
+      "tag": "DIRECT",
+      "type": "direct"
+    },
+    {
+      "tag": "REJECT",
+      "type": "block"
+    },
+    {
+      "tag": "dns-out",
+      "type": "dns"
+    },
+    {
+      "tag": "Remote 1",
+      "type": "shadowsocks",
+      "method": "chacha20-ietf-poly1305",
+      "password": "your-favoraite-passphrase",
+      "server": "your.socks.provider.com",
+      "server_port": 30001
+    },
+    {
+      "tag": "Remote 2",
+      "type": "shadowsocks",
+      "method": "chacha20-ietf-poly1305",
+      "password": "your-favoraite-passphrase",
+      "server": "your.socks.provider.com",
+      "server_port": 30002
+    },
+    {
+      "tag": "Auto Selection",
+      "type": "urltest",
+      "outbounds": [
+        "Remote 1",
+        "Remote 2"
+      ],
+      "url": "http://cp.cloudflare.com/",
+      "interval": "5m",
+      "tolerance": 200
+    },
+    {
+      "tag": "Manual Selection",
+      "type": "selector",
+      "outbounds": [
+        "Remote 1",
+        "Remote 2"
+      ],
+      "default": "Remote 1",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "PROXY",
+      "type": "selector",
+      "outbounds": [
+        "Auto Selection",
+        "Manual Selection"
+      ],
+      "default": "Auto Selection",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "BLOCK",
+      "type": "selector",
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "REJECT",
+        "DIRECT"
+      ]
+    },
+    {
+      "tag": "GLOBAL",
+      "type": "selector",
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "PROXY",
+        "DIRECT"
+      ]
+    },
+    {
+      "tag": "FINAL",
+      "type": "selector",
+      "outbounds": [
+        "PROXY",
+        "DIRECT",
+        "Manual Selection"
+      ]
+    }
+  ]
+}
